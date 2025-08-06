@@ -11,8 +11,11 @@ The steward for this license is the Perl and Raku Foundation.
 I've copied the license from [this URL](https://www.perlfoundation.org/artistic-license-20.html),
 adding markdown to the title and subheads by hand to make it look a little nicer.
 
-At brian's suggestion, I've adopted this license for the project as a whole.
-If any individual tool has a different license, it is specified in the source of that tool.
+At brian's suggestion, I've adopted this license for the project as a whole,
+but some individual tools have a different license, which is specified in the source of that tool.
+For example, `fortune` is GPL-licensed, so that license should be retained for the converted version as well.
+Even if a lawyer could argue that the original license need not be applied to the converted version,
+re-imposing it seems like good manners.
 
 
 ## TODO
@@ -35,6 +38,12 @@ I have no plan to add tests until I have created drafts of all the tools.
 
 * I need to enhance `bin/port` and `bin/writeport` to work on Linux. Right now, they just work on my Mac.
 
+* Starting with spell, I ran out of quota for Gemini Pro 2.5 and had to fall back to Gemini 2.5 Flash. Perhaps these won't be as good.
+The conversions are much faster, and lack both the preamble, about what the conversion will do,
+and the explanation afterwards of how the converted code works.
+
+* Even with Flash, tools with huge amounts of internal data, like `factor` or `banner` convert slowly.
+
 
 ## Notes
 
@@ -54,7 +63,14 @@ such as the National Center for Atmospheric Research (NCAR).
 
 For the rest of us, `asa` is historically interesting. It offers a glimpse into the history of computing: what used to be important enough to write utilities around.
 
-* Some PPT utilities are really Perl-specific. A few of these have been converted into Python analogues.
+* Some PPT utilities are really Perl-specific.
+Some have been converted into Python analogues.
+For example, `par` generates a self-extracting Python script instead of a self-extracting Perl script.
+
 Others like `PPT/bin/awk` and `PPT/bin/find` don't convert at all, because they depend on Perl.
 `awk` is a front-end for `a2p`, and find is a front end for `find2perl`.
 Python implementations of either are possible, but need to be done as an independent effort.
+
+
+* Gemini thinks `PPT/bin/dc` is impossible to implement in Python. The `dc` language is too complex and un-Pythonic.
+Interestingly `PPT/bin/bc` presented no problems.
