@@ -72,5 +72,9 @@ Others like `PPT/bin/awk` and `PPT/bin/find` don't convert at all, because they 
 Python implementations of either are possible, but need to be done as an independent effort.
 
 
-* Gemini thinks `PPT/bin/dc` is impossible to implement in Python. The `dc` language is too complex and un-Pythonic.
-Interestingly `PPT/bin/bc` presented no problems.
+* Gemini Pro 2.5 thinks `PPT/bin/dc` is impossible to implement in Python. The `dc` language is too complex and un-Pythonic.
+When Gemini Flash had no problem with `PPT/bin/bc`, I tried giving it `dc`, and it converted that, too.
+This makes me suspicious of Gemini Flash.
+
+
+
