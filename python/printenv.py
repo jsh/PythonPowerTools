@@ -1,0 +1,74 @@
+Please port the following script from Perl to Python:
+
+    
+#!/usr/bin/perl
+
+=begin metadata
+
+Name: printenv
+Description: display the environment
+Author: Randy Yarger, randy.yarger@nextel.com
+License: perl
+
+=end metadata
+
+=cut
+
+
+use strict;
+
+my ($VERSION) = '1.3';
+
+my $rc = 0;
+my $arg = shift;
+if (defined $arg) {
+    if (exists $ENV{$arg}) {
+        print $ENV{$arg}, "\n";
+    } else {
+        $rc = 1;
+    }
+} else {
+    while (my ($key, $value) = each(%ENV)) {
+        print "$key=$value\n";
+    }
+}
+exit $rc;
+
+__END__
+
+=pod
+
+=head1 NAME
+
+printenv - Display the environment
+
+=head1 SYNOPSIS
+
+printenv [name]
+
+=head1 DESCRIPTION
+
+printenv displays the current environment. If an argument is supplied, only the
+value of that variable is displayed.
+
+=head1 BUGS
+
+I<printenv> has no known bugs.
+
+=head1 AUTHOR
+
+The Perl implementation of I<printenv>
+was written by Randy Yarger, I<randy.yarger@nextel.com>.
+
+=head1 COPYRIGHT and LICENSE
+
+This program is copyright by Randy Yarger 1999.
+
+This program is free and open software. You may use, modify, distribute
+and sell this program (and any modified variants) in any way you wish,
+provided you do not restrict others to do the same.
+
+=cut
+
+
+
