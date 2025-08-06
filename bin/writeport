@@ -21,6 +21,14 @@ tool=${1:?"
 system_copy_paste_tools
 
 python=python/${tool}.py
+
+name_check() {
+    filename=$(basename $python .py)
+    internal_name=$(awk '/Name:/{print $2}' $python)
+    [ $filename = $internal_name ] || die "$python: bad 'Name:' field"
+}
+
 $CAT > $python
 echo >> $python
 chmod +x $python
+name_check
