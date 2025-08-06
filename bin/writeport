@@ -1,0 +1,26 @@
+#!/bin/bash -eu
+
+die() { echo "$@"; exit 1; } >&2                                    # error msg to stderr and fail
+
+system_copy_paste_tools() {                                         # locate command-line copy and paste tools
+    system=$(uname -o)                                              # system-specific:
+                                                                    #   CP is "copy into paste buffer"
+    case $(uname -o) in                                             #   CAT is "cat out paste buffer"
+        Darwin)
+            CP=pbcopy
+            CAT=pbpaste
+            ;;
+    esac
+}
+
+tool=${1:?"
+
+    Usage: $(basename $0) toolname"
+}                                                                   # arg is name of tool to port
+
+system_copy_paste_tools
+
+python=python/${tool}.py
+$CAT > $python
+echo >> $python
+chmod +x $python
