@@ -1,0 +1,40 @@
+#!/bin/bash -eu
+
+die() { echo "$@"; exit 1; } >&2                                    # error msg to stderr and fail
+
+system_copy_paste_tools() {                                         # locate command-line copy and paste tools
+    system=$(uname -o)                                              # system-specific:
+                                                                    #   CP is "copy into paste buffer"
+    case $(uname -o) in                                             #   CAT is "cat out paste buffer"
+        Darwin)
+            CP=pbcopy
+            CAT=pbpaste
+            ;;
+    esac
+}
+
+tool=${1:?"
+
+    Usage: $(basename $0) toolname"
+}                                                                   # arg is name of tool to port
+
+
+PPT="../PerlPowerTools"                                             # local clone of PerlPowerTools repo
+[ -d $PPT ] ||
+    git clone https://github.com/briandfoy/PerlPowerTools.git $PPT  # if it's not there, clone it.
+perl=$PPT/bin/$tool                                                 # location of the PPT version.
+[ -f $perl ] || die "$perl must exist"                              # make sure it's there
+
+make_ai_prompt() {                                                  # create prompt for AI agent
+    prompt=/tmp/prompt
+    echo "Please port the following script from Perl to Python:
+
+    " > $prompt                                                     # request
+
+    cat $perl >> $prompt                                            # followed by contents of script to convert
+}
+
+
+system_copy_paste_tools
+make_ai_prompt
+cat $prompt | $CP                                                   # put prompt into paste buffer
